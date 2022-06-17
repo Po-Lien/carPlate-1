@@ -1,0 +1,11 @@
+# DataSource配置/jpa以下:hibernate 5.3.1後新增了MYSQL8Dialect
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/platedb
+    username: root
+    password: Brian861006$$
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
