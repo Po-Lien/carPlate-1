@@ -13,7 +13,7 @@ public class CarPlate1Application {
 
 	@RequestMapping("/")
 	String home() {
-		return "Hello World!";
+		return "test for sourceTree Token Setting";
 	}
 
 	private static final Logger log = LoggerFactory.getLogger(CarPlate1Application.class);
