@@ -1,0 +1,19 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    url: jdbc:postgresql://tiny.db.elephantsql.com/pqtldixc
+    username: pqtldixc
+    password: 9VphnLd9bKmbphEHL4y9onDqKQ2CiwO3
+    hikari:
+      auto-commit: false
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    show-sql: false
+  devtools:
+    livereload:
+      enabled: false
+    remote:
+      restart:
+        enabled: false

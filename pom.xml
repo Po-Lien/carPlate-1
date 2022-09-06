@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 專案的名稱、描述、版本等專案基本資訊 -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -12,9 +14,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>carPlate-1</name>
 	<description>Demo project for Spring Boot</description>
+
+	<!-- 這裡可以設定一些在pom.xml內的變數 -->
 	<properties>
 		<java.version>11</java.version>
+		<profile.extension /> <!-- 初始化 profile.extension 參數的值為空值 -->
 	</properties>
+
+	<!-- 這裡管理在這個專案中所使用的套件 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -22,25 +29,82 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!--加入 MySQL JDBC connector J的依賴-->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
 		</dependency>
 	</dependencies>
 
+	<!-- 這裡可以設定當使用mvn執行建構時所使用的plugin -->
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+		<defaultGoal>spring-boot:run</defaultGoal>
 	</build>
+
+	<!-- 這裡可以設定當使用mvn執行建構時可透過 "mvn -P" 執行不同的建構程序(流程) -->
+	<profiles>
+		<profile>
+			<!-- 例如當執行 "mvn -Pprod" 時，則會使用這個profile的建構內容 -->
+			<id>prod</id>
+			<properties>
+				<activatedProperties>production${profile.extension}</activatedProperties>
+			</properties>
+			<!-- 可以在每個profile中加上特定的dependency -->
+			<dependencies>
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+				</dependency>
+			</dependencies>
+			<!-- 也可以在每個profile中定義不同的建構流程 -->
+			<build />
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<activatedProperties>development${profile.extension}</activatedProperties>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<optional>true</optional>
+				</dependency>
+
+				<!--加入 MySQL JDBC connector J的依賴-->
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<!-- 擴充項目的profile -->
+		<profile>
+			<id>ext</id>
+			<properties>
+				<profile.extension>,extension</profile.extension>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

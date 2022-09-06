@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 # DataSource配置/jpa以下:hibernate 5.3.1後新增了MYSQL8Dialect
 spring:
   datasource:
@@ -5,7 +8,15 @@ spring:
     username: root
     password: Brian861006$$
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: false
   jpa:
+    database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: update
+    show-sql: true
+  devtools:
+    livereload:
+      enabled: false
+    remote:
+      restart:
+        enabled: false
