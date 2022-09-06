@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="20220905012" author="lien">
+		<createTable tableName="page_info">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="nameREF" type="bigint">
+				<constraints nullable="true" />
+			</column>
+			<column name="dept" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="station" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="windowNo" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="carType" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="energyType" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="plateType" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!-- 外鍵設定 -->
+	<changeSet id="20220905012-1" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="nameREF" 
+			baseTableName="page_info"
+			constraintName="page_info_FK_name_ref" 
+			referencedColumnNames="id"
+			referencedTableName="name_ref"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+	<changeSet id="20220905012-2" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="dept" 
+			baseTableName="page_info"
+			constraintName="page_info_FK_dept" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="dept"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+	<changeSet id="20220905012-3" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="station" 
+			baseTableName="page_info"
+			constraintName="page_info_FK_station" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="station"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+	<changeSet id="20220905012-4" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="windowNo" 
+			baseTableName="page_info"
+			constraintName="page_info_FK_window_no" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="window_no"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+	<changeSet id="20220905012-5" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="carType" 
+			baseTableName="page_info"
+			constraintName="page_info_FK_car_type" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="car_type"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+	<changeSet id="20220905012-6" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="energyType" 
+			baseTableName="page_info"
+			constraintName="page_info_FK_energy_type" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="energy_type"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+	<changeSet id="20220905012-7" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="plateType" 
+			baseTableName="page_info"
+			constraintName="page_info_FK_plate_type" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="plate_type"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+</databaseChangeLog>

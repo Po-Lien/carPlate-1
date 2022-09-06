@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="20220905004" author="lien">
+		<createTable tableName="window_no">
+			<column name="htmlValue" type="varchar(3)" autoIncrement="false">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="htmlNM" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="stationValue" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!-- 外鍵設定 -->
+	<changeSet id="20220905004-1" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="stationValue" 
+			baseTableName="window_no"
+			constraintName="window_no_FK_station" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="station"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+</databaseChangeLog>

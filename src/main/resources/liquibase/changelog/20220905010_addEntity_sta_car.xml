@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="20220905010" author="lien">
+		<createTable tableName="sta_car">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="sta_value" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="car_value" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!-- 外鍵設定 -->
+	<changeSet id="20220905010-1" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="sta_value" 
+			baseTableName="sta_car"
+			constraintName="sta_car_FK_station" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="station"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+	<changeSet id="20220905010-2" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="car_value" 
+			baseTableName="sta_car"
+			constraintName="sta_car_FK_car_type" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="car_type"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+</databaseChangeLog>

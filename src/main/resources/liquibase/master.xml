@@ -1,0 +1,21 @@
+<databaseChangeLog
+ xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+ xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="
+   http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+  <!-- 規則：{yyyyMMddXXX}_{type}_{entityName}.xml -->
+   <include file="liquibase/changelog/20220905002_addEntity_dept.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905003_addEntity_station.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905004_addEntity_window_no.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905005_addEntity_plate_type.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905006_addEntity_name_ref.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905007_addEntity_energy_type.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905008_addEntity_car_type.xml" relativeToChangelogFile="false" />
+
+   <include file="liquibase/changelog/20220905009_addEntity_sta_plt.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905010_addEntity_sta_car.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905011_addEntity_eng_car.xml" relativeToChangelogFile="false" />
+   <include file="liquibase/changelog/20220905012_addEntity_page_info.xml" relativeToChangelogFile="false" />
+</databaseChangeLog>

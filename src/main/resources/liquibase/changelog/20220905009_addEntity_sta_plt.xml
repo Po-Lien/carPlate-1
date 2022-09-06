@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="20220905009" author="lien">
+		<createTable tableName="sta_plt">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="sta_value" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="plt_value" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!-- 外鍵設定 -->
+	<changeSet id="20220905009-1" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="sta_value" 
+			baseTableName="sta_plt"
+			constraintName="sta_plt_FK_station" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="station"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+	<changeSet id="20220905009-2" author="lien">
+		<addForeignKeyConstraint
+			baseColumnNames="plt_value" 
+			baseTableName="sta_plt"
+			constraintName="sta_plt_FK_plate_type" 
+			referencedColumnNames="htmlValue"
+			referencedTableName="plate_type"
+			onDelete="SET DEFAULT"
+			onUpdate="CASCADE" />
+	</changeSet>
+
+</databaseChangeLog>
