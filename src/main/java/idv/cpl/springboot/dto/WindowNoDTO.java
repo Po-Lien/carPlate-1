@@ -11,11 +11,16 @@ import javax.persistence.Table;
 @Table(name = "window_no")
 public class WindowNoDTO {
 
+	public WindowNoDTO(Long htmlValue, String htmlNM) {
+		this.htmlValue = htmlValue;
+		this.htmlNM = htmlNM;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long htmlValue;
 
-	@Column(name = "htmlNM")
+	@Column(name = "htmlnm")
 	private String htmlNM;
 
 	public Long getHtmlValue() {

@@ -21,6 +21,11 @@ public class EngCarDTO {
 	@Column(name = "car_value")
 	private String car_value;
 
+	public EngCarDTO(String eng_value, String car_value) {
+		this.eng_value = eng_value;
+		this.car_value = car_value;
+	}
+
 	public Long getId() {
 		return id;
 	}

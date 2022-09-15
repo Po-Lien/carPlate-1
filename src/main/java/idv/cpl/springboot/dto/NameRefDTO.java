@@ -15,11 +15,16 @@ public class NameRefDTO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "htmlValue")
+	@Column(name = "htmlvalue")
 	private String htmlValue;
 
-	@Column(name = "htmlNM")
+	@Column(name = "htmlnm")
 	private String htmlNM;
+
+	public NameRefDTO(String htmlValue, String htmlNM) {
+		this.htmlValue = htmlValue;
+		this.htmlNM = htmlNM;
+	}
 
 	public Long getId() {
 		return id;

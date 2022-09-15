@@ -15,6 +15,11 @@ public class StaPltDTO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	public StaPltDTO(String sta_value, String plt_value) {
+		this.sta_value = sta_value;
+		this.plt_value = plt_value;
+	}
+
 	@Column(name = "sta_value")
 	private String sta_value;
 

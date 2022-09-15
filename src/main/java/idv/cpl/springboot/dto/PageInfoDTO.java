@@ -15,8 +15,8 @@ public class PageInfoDTO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "nameREF")
-	private String nameREF;
+	@Column(name = "nameref")
+	private Long nameREF;
 
 	@Column(name = "dept")
 	private String dept;
@@ -24,16 +24,16 @@ public class PageInfoDTO {
 	@Column(name = "station")
 	private String station;
 
-	@Column(name = "windowNo")
+	@Column(name = "windowno")
 	private String windowNo;
 
-	@Column(name = "carType")
+	@Column(name = "cartype")
 	private String carType;
 
-	@Column(name = "energyType")
+	@Column(name = "energytype")
 	private String energyType;
 
-	@Column(name = "plateType")
+	@Column(name = "platetype")
 	private String plateType;
 
 	public Long getId() {
@@ -44,11 +44,11 @@ public class PageInfoDTO {
 		this.id = id;
 	}
 
-	public String getNameREF() {
+	public Long getNameREF() {
 		return nameREF;
 	}
 
-	public void setNameREF(String nameREF) {
+	public void setNameREF(Long nameREF) {
 		this.nameREF = nameREF;
 	}
 

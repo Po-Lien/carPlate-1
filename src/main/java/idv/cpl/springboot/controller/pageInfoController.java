@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import idv.cpl.springboot.dto.PageInfoDTO;
+import idv.cpl.springboot.repository.PageInfoRepository;
 import idv.cpl.springboot.service.PageInfoService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -28,76 +29,79 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping("/api")
 public class pageInfoController {
 
-    private PageInfoService pageInfoService;
+	private PageInfoRepository pageInfoRepository;
 
-    public pageInfoController(PageInfoService pageInfoService) {
-        this.pageInfoService = pageInfoService;
-    }
+	private PageInfoService pageInfoService;
 
-    @PostMapping("/pageInfo")
-    @ApiResponses({ @ApiResponse(responseCode = "200", description = "pageInfo added successful"),
-            @ApiResponse(responseCode = "400", description = "cannot contain id") })
-    public ResponseEntity<PageInfoDTO> createpageInfo(@RequestBody PageInfoDTO PageInfoDTO) {
-        if (PageInfoDTO.getId() != null) {
-            return ResponseEntity.status(400).header("err-msg", "A new pageInfo cannot already have an id").build();
-        }
-        return ResponseEntity.ok().body(pageInfoService.save(PageInfoDTO));
-    }
+	public pageInfoController(PageInfoRepository pageInfoRepository, PageInfoService pageInfoService) {
+		this.pageInfoRepository = pageInfoRepository;
+		this.pageInfoService = pageInfoService;
+	}
 
-    @PutMapping("/pageInfo")
-    @ApiResponses({ @ApiResponse(responseCode = "200", description = "pageInfo added successful"),
-            @ApiResponse(responseCode = "400", description = "must have an id"),
-            @ApiResponse(responseCode = "404", description = "not existed id") })
-    public ResponseEntity<PageInfoDTO> updatepageInfo(@RequestBody PageInfoDTO PageInfoDTO) {
-        if (PageInfoDTO.getId() == null) {
-            return ResponseEntity.status(400).header("err-msg", "An update pageInfo must have an id").build();
-        } else if (!pageInfoService.findById(PageInfoDTO.getId()).isPresent()) {
-            return ResponseEntity.status(404).header("err-msg", "Not existed id.").build();
-        }
-        return ResponseEntity.ok().body(pageInfoService.save(PageInfoDTO));
-    }
+	@PostMapping("/pageInfo")
+	@ApiResponses({ @ApiResponse(responseCode = "200", description = "pageInfo added successful"),
+			@ApiResponse(responseCode = "400", description = "cannot contain id") })
+	public ResponseEntity<PageInfoDTO> createpageInfo(@RequestBody PageInfoDTO PageInfoDTO) {
+		if (PageInfoDTO.getId() != null) {
+			return ResponseEntity.status(400).header("err-msg", "A new pageInfo cannot already have an id").build();
+		}
+		return ResponseEntity.ok().body(pageInfoService.save(PageInfoDTO));
+	}
 
-    @DeleteMapping("/pageInfo/{id}")
-    public void deletepageInfoById(@PathVariable Long id) {
-        pageInfoService.deleteById(id);
-    }
+	@PutMapping("/pageInfo")
+	@ApiResponses({ @ApiResponse(responseCode = "200", description = "pageInfo added successful"),
+			@ApiResponse(responseCode = "400", description = "must have an id"),
+			@ApiResponse(responseCode = "404", description = "not existed id") })
+	public ResponseEntity<PageInfoDTO> updatepageInfo(@RequestBody PageInfoDTO PageInfoDTO) {
+		if (PageInfoDTO.getId() == null) {
+			return ResponseEntity.status(400).header("err-msg", "An update pageInfo must have an id").build();
+		} else if (!pageInfoRepository.findById(PageInfoDTO.getId()).isPresent()) {
+			return ResponseEntity.status(404).header("err-msg", "Not existed id.").build();
+		}
+		return ResponseEntity.ok().body(pageInfoService.save(PageInfoDTO));
+	}
 
-    @DeleteMapping("/pageInfo")
-    public void deletepageInfoByEntityInBatch(@RequestBody List<PageInfoDTO> PageInfoDTOs) {
-        pageInfoService.deleteInBatch(PageInfoDTOs);
-    }
+	@DeleteMapping("/pageInfo/{id}")
+	public void deletepageInfoById(@PathVariable Long id) {
+		pageInfoRepository.deleteById(id);
+	}
 
-    @GetMapping("/pageInfo/{id}")
-    public Optional<PageInfoDTO> getpageInfoById(@PathVariable Long id) {
-        return pageInfoService.findById(id);
-    }
+	@DeleteMapping("/pageInfo")
+	public void deletepageInfoByEntityInBatch(@RequestBody List<PageInfoDTO> PageInfoDTOs) {
+		pageInfoRepository.deleteAllInBatch(PageInfoDTOs);
+	}
 
-    @GetMapping("/pageInfo/bySortParams")
-    public ResponseEntity<List<PageInfoDTO>> findAllBySortParams(
-            @RequestParam(value = "sortby", defaultValue = "id") String sortBy,
-            @RequestParam(value = "direction", defaultValue = "ASC") Direction direction) {
-        // 暫時不考慮排序的目標欄位是某存在，但如果搜尋的欄位名稱不存在時，則會報錯:
-        // org.springframework.data.mapping.PropertyReferenceException
-        return ResponseEntity.ok().body(pageInfoService.findAll(Sort.by(direction, sortBy)));
-    }
+	@GetMapping("/pageInfo/{id}")
+	public Optional<PageInfoDTO> getpageInfoById(@PathVariable Long id) {
+		return pageInfoService.findById(id);
+	}
 
-    @GetMapping("/pageInfo/byPageParams")
-    public ResponseEntity<Page<PageInfoDTO>> findAllByPageRequestParams(
-            @RequestParam(value = "sortby", defaultValue = "id") String sortBy,
-            @RequestParam(value = "direction", defaultValue = "ASC") Direction direction,
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok()
-                .body(pageInfoService.findAll(PageRequest.of(page, size, Sort.by(direction, sortBy))));
-    }
+	@GetMapping("/pageInfo/bySortParams")
+	public ResponseEntity<List<PageInfoDTO>> findAllBySortParams(
+			@RequestParam(value = "sortby", defaultValue = "id") String sortBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") Direction direction) {
+		// 暫時不考慮排序的目標欄位是某存在，但如果搜尋的欄位名稱不存在時，則會報錯:
+		// org.springframework.data.mapping.PropertyReferenceException
+		return ResponseEntity.ok().body(pageInfoRepository.findAll(Sort.by(direction, sortBy)));
+	}
 
-    @GetMapping("/pageInfo/bySort")
-    public ResponseEntity<List<PageInfoDTO>> findAllBySort(Sort sort) {
-        return ResponseEntity.ok().body(pageInfoService.findAll(sort));
-    }
+	@GetMapping("/pageInfo/byPageParams")
+	public ResponseEntity<Page<PageInfoDTO>> findAllByPageRequestParams(
+			@RequestParam(value = "sortby", defaultValue = "id") String sortBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") Direction direction,
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size) {
+		return ResponseEntity.ok()
+				.body(pageInfoRepository.findAll(PageRequest.of(page, size, Sort.by(direction, sortBy))));
+	}
 
-    @GetMapping("/pageInfo/byPageable")
-    public ResponseEntity<Page<PageInfoDTO>> findAllByPageable(Pageable pageable) {
-        return ResponseEntity.ok().body(pageInfoService.findAll(pageable));
-    }
+	@GetMapping("/pageInfo/bySort")
+	public ResponseEntity<List<PageInfoDTO>> findAllBySort(Sort sort) {
+		return ResponseEntity.ok().body(pageInfoRepository.findAll(sort));
+	}
+
+	@GetMapping("/pageInfo/byPageable")
+	public ResponseEntity<Page<PageInfoDTO>> findAllByPageable(Pageable pageable) {
+		return ResponseEntity.ok().body(pageInfoService.findAllByPageable(pageable));
+	}
 }

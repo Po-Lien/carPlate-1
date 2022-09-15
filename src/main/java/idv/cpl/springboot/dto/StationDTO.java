@@ -15,7 +15,7 @@ public class StationDTO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long htmlValue;
 
-	@Column(name = "htmlNM")
+	@Column(name = "htmlnm")
 	private String htmlNM;
 
 	public Long getHtmlValue() {

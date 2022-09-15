@@ -20,6 +20,11 @@ public class StaCarDTO {
 
 	@Column(name = "car_value")
 	private String car_value;
+	
+	public StaCarDTO(String sta_value, String car_value) {
+		this.sta_value = sta_value;
+		this.car_value = car_value;
+	}
 
 	public Long getId() {
 		return id;

@@ -15,8 +15,13 @@ public class EnergyTypeDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long htmlValue;
 
-	@Column(name = "htmlNM")
+	@Column(name = "htmlnm")
     private String htmlNM;
+
+	public EnergyTypeDTO(Long htmlValue, String htmlNM) {
+		this.htmlValue = htmlValue;
+		this.htmlNM = htmlNM;
+	}
 
 	public Long getHtmlValue() {
 		return htmlValue;

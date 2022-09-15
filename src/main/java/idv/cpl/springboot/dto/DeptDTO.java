@@ -15,8 +15,13 @@ public class DeptDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long htmlValue;
 
-	@Column(name = "htmlNM")
+	@Column(name = "htmlnm")
     private String htmlNM;
+
+	public DeptDTO(Long htmlValue, String htmlNM) {
+		this.htmlValue = htmlValue;
+		this.htmlNM = htmlNM;
+	}
 
 	public Long getHtmlValue() {
 		return htmlValue;
