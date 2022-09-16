@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="20220915011" author="lien">
+
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="name_ref" />
+		</preConditions>
+		<dropTable cascadeConstraints="true" tableName="name_ref" />
+
+	</changeSet>
+
+	<changeSet id="20220915010" author="lien">
+
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="page_info" />
+		</preConditions>
+		<dropTable cascadeConstraints="true" tableName="page_info" />
+
+	</changeSet>
+
+</databaseChangeLog>

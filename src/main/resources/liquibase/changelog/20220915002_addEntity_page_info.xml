@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="20220915007" author="lien">
+		<createTable tableName="page_info">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="deptValue" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="deptNM" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="stationValue" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="stationNM" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="windowNoValue" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="windowNoNM" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="carTypeValue" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="carTypeNM" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="energyTypeValue" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="energyTypeNM" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="plateTypeValue" type="varchar(3)">
+				<constraints nullable="true" />
+			</column>
+			<column name="plateTypeNM" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+</databaseChangeLog>
