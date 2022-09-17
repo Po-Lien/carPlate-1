@@ -1,58 +1,68 @@
 package idv.cpl.springboot.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
 
+
+/**
+ * The persistent class for the eng_car database table.
+ * 
+ */
 @Entity
-@Table(name = "eng_car")
-public class EngCarDTO {
+@Table(name="eng_car")
+@NamedQuery(name="EngCarDTO.findAll", query="SELECT e FROM EngCarDTO e")
+public class EngCarDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
 
-	@Column(name = "eng_value")
-	private String eng_value;
+	//bi-directional many-to-one association to CarTypeDTO
+	@ManyToOne
+	@JoinColumn(name="car_value")
+	private CarTypeDTO carType;
 
-	@Column(name = "car_value")
-	private String car_value;
+	//bi-directional many-to-one association to EnergyTypeDTO
+	@ManyToOne
+	@JoinColumn(name="eng_value")
+	private EnergyTypeDTO energyType;
 
-	public EngCarDTO(String eng_value, String car_value) {
-		this.eng_value = eng_value;
-		this.car_value = car_value;
+	public EngCarDTO() {
 	}
 
-	public Long getId() {
-		return id;
+	public EngCarDTO(CarTypeDTO carType, EnergyTypeDTO energyType) {
+        this.carType = carType;
+        this.energyType = energyType;
+    }
+
+    public long getId() {
+		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getEng_value() {
-		return eng_value;
+	public CarTypeDTO getCarType() {
+		return this.carType;
 	}
 
-	public void setEng_value(String eng_value) {
-		this.eng_value = eng_value;
+	public void setCarType(CarTypeDTO carType) {
+		this.carType = carType;
 	}
 
-	public String getCar_value() {
-		return car_value;
+	public EnergyTypeDTO getEnergyType() {
+		return this.energyType;
 	}
 
-	public void setCar_value(String car_value) {
-		this.car_value = car_value;
+	public void setEnergyType(EnergyTypeDTO energyType) {
+		this.energyType = energyType;
 	}
 
-	@Override
-	public String toString() {
-		return "EngCarDTO [id=" + id + ", eng_value=" + eng_value + ", car_value=" + car_value + "]";
-	}
+    @Override
+    public String toString() {
+        return "EngCarDTO [id=" + id + ", carType=" + carType + ", energyType=" + energyType + "]";
+    }
 
 }

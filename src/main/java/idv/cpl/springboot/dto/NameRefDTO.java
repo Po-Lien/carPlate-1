@@ -1,58 +1,90 @@
 package idv.cpl.springboot.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
+
+/**
+ * The persistent class for the name_ref database table.
+ * 
+ */
 @Entity
-@Table(name = "name_ref")
-public class NameRefDTO {
+@Table(name="name_ref")
+@NamedQuery(name="NameRefDTO.findAll", query="SELECT n FROM NameRefDTO n")
+public class NameRefDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
 
-	@Column(name = "htmlvalue")
-	private String htmlValue;
-
-	@Column(name = "htmlnm")
 	private String htmlNM;
 
-	public NameRefDTO(String htmlValue, String htmlNM) {
-		this.htmlValue = htmlValue;
-		this.htmlNM = htmlNM;
+	private String htmlValue;
+
+	//bi-directional many-to-one association to PageInfoDTO
+	@OneToMany(mappedBy="nameRef")
+	private List<PageInfoDTO> pageInfos;
+
+	public NameRefDTO() {
 	}
 
-	public Long getId() {
-		return id;
+	public NameRefDTO(String htmlNM, String htmlValue) {
+        this.htmlNM = htmlNM;
+        this.htmlValue = htmlValue;
+    }
+
+    public long getId() {
+		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getHtmlValue() {
-		return htmlValue;
-	}
-
-	public void setHtmlValue(String htmlValue) {
-		this.htmlValue = htmlValue;
-	}
-
 	public String getHtmlNM() {
-		return htmlNM;
+		return this.htmlNM;
 	}
 
 	public void setHtmlNM(String htmlNM) {
 		this.htmlNM = htmlNM;
 	}
 
-	@Override
-	public String toString() {
-		return "NameRefDTO [id=" + id + ", htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + "]";
+	public String getHtmlValue() {
+		return this.htmlValue;
 	}
+
+	public void setHtmlValue(String htmlValue) {
+		this.htmlValue = htmlValue;
+	}
+
+	public List<PageInfoDTO> getPageInfos() {
+		return this.pageInfos;
+	}
+
+	public void setPageInfos(List<PageInfoDTO> pageInfos) {
+		this.pageInfos = pageInfos;
+	}
+
+	public PageInfoDTO addPageInfo(PageInfoDTO pageInfo) {
+		getPageInfos().add(pageInfo);
+		pageInfo.setNameRef(this);
+
+		return pageInfo;
+	}
+
+	public PageInfoDTO removePageInfo(PageInfoDTO pageInfo) {
+		getPageInfos().remove(pageInfo);
+		pageInfo.setNameRef(null);
+
+		return pageInfo;
+	}
+
+    @Override
+    public String toString() {
+        return "NameRefDTO [id=" + id + ", htmlNM=" + htmlNM + ", htmlValue=" + htmlValue + ", pageInfos=" + pageInfos
+                + "]";
+    }
 
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="carPlate-1">
+		<class>idv.cpl.springboot.dto.CarTypeDTO</class>
+		<class>idv.cpl.springboot.dto.DeptDTO</class>
+		<class>idv.cpl.springboot.dto.EnergyTypeDTO</class>
+		<class>idv.cpl.springboot.dto.EngCarDTO</class>
+		<class>idv.cpl.springboot.dto.NameRefDTO</class>
+		<class>idv.cpl.springboot.dto.PageInfoDTO</class>
+		<class>idv.cpl.springboot.dto.PlateTypeDTO</class>
+		<class>idv.cpl.springboot.dto.StaCarDTO</class>
+		<class>idv.cpl.springboot.dto.StaPltDTO</class>
+		<class>idv.cpl.springboot.dto.StationDTO</class>
+		<class>idv.cpl.springboot.dto.WindowNoDTO</class>
+	</persistence-unit>
+</persistence>

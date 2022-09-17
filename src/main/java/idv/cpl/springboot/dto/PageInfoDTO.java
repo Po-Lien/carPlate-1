@@ -1,110 +1,149 @@
 package idv.cpl.springboot.dto;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+
+/**
+ * The persistent class for the page_info database table.
+ * 
+ */
 @Entity
-@Table(name = "page_info")
-public class PageInfoDTO {
+@Table(name="page_info")
+@NamedQuery(name="PageInfoDTO.findAll", query="SELECT p FROM PageInfoDTO p")
+public class PageInfoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "nameref")
-	private Long nameREF;
+	//bi-directional many-to-one association to CarTypeDTO
+	@ManyToOne
+	@JoinColumn(name="carType")
+	private CarTypeDTO carTypeBean;
 
-	@Column(name = "dept")
-	private String dept;
+	//bi-directional many-to-one association to DeptDTO
+	@ManyToOne
+	@JoinColumn(name="dept")
+	private DeptDTO deptBean;
 
-	@Column(name = "station")
-	private String station;
+	//bi-directional many-to-one association to EnergyTypeDTO
+	@ManyToOne
+	@JoinColumn(name="energyType")
+	private EnergyTypeDTO energyTypeBean;
 
-	@Column(name = "windowno")
-	private String windowNo;
+	//bi-directional many-to-one association to NameRefDTO
+	@ManyToOne
+	@JoinColumn(name="nameREF")
+	private NameRefDTO nameRef;
 
-	@Column(name = "cartype")
-	private String carType;
+	//bi-directional many-to-one association to PlateTypeDTO
+	@ManyToOne
+	@JoinColumn(name="plateType")
+	private PlateTypeDTO plateTypeBean;
 
-	@Column(name = "energytype")
-	private String energyType;
+	//bi-directional many-to-one association to StationDTO
+	@ManyToOne
+	@JoinColumn(name="station")
+	private StationDTO stationBean;
 
-	@Column(name = "platetype")
-	private String plateType;
+	//bi-directional many-to-one association to WindowNoDTO
+	@ManyToOne
+	@JoinColumn(name="windowNo")
+	private WindowNoDTO windowNoBean;
 
-	public Long getId() {
-		return id;
+	public PageInfoDTO() {
+	}
+
+	public PageInfoDTO(Long id, CarTypeDTO carTypeBean, DeptDTO deptBean, EnergyTypeDTO energyTypeBean,
+            PlateTypeDTO plateTypeBean, StationDTO stationBean, WindowNoDTO windowNoBean) {
+        this.id = id;
+        this.carTypeBean = carTypeBean;
+        this.deptBean = deptBean;
+        this.energyTypeBean = energyTypeBean;
+        this.plateTypeBean = plateTypeBean;
+        this.stationBean = stationBean;
+        this.windowNoBean = windowNoBean;
+    }
+
+    public Long getId() {
+		return this.id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getNameREF() {
-		return nameREF;
+	public CarTypeDTO getCarTypeBean() {
+		return this.carTypeBean;
 	}
 
-	public void setNameREF(Long nameREF) {
-		this.nameREF = nameREF;
+	public void setCarTypeBean(CarTypeDTO carTypeBean) {
+		this.carTypeBean = carTypeBean;
 	}
 
-	public String getDept() {
-		return dept;
+	public DeptDTO getDeptBean() {
+		return this.deptBean;
 	}
 
-	public void setDept(String dept) {
-		this.dept = dept;
+	public void setDeptBean(DeptDTO deptBean) {
+		this.deptBean = deptBean;
 	}
 
-	public String getStation() {
-		return station;
+	public EnergyTypeDTO getEnergyTypeBean() {
+		return this.energyTypeBean;
 	}
 
-	public void setStation(String station) {
-		this.station = station;
+	public void setEnergyTypeBean(EnergyTypeDTO energyTypeBean) {
+		this.energyTypeBean = energyTypeBean;
 	}
 
-	public String getWindowNo() {
-		return windowNo;
+	public NameRefDTO getNameRef() {
+		return this.nameRef;
 	}
 
-	public void setWindowNo(String windowNo) {
-		this.windowNo = windowNo;
+	public void setNameRef(NameRefDTO nameRef) {
+		this.nameRef = nameRef;
 	}
 
-	public String getCarType() {
-		return carType;
+	public PlateTypeDTO getPlateTypeBean() {
+		return this.plateTypeBean;
 	}
 
-	public void setCarType(String carType) {
-		this.carType = carType;
+	public void setPlateTypeBean(PlateTypeDTO plateTypeBean) {
+		this.plateTypeBean = plateTypeBean;
 	}
 
-	public String getEnergyType() {
-		return energyType;
+	public StationDTO getStationBean() {
+		return this.stationBean;
 	}
 
-	public void setEnergyType(String energyType) {
-		this.energyType = energyType;
+	public void setStationBean(StationDTO stationBean) {
+		this.stationBean = stationBean;
 	}
 
-	public String getPlateType() {
-		return plateType;
+	public WindowNoDTO getWindowNoBean() {
+		return this.windowNoBean;
 	}
 
-	public void setPlateType(String plateType) {
-		this.plateType = plateType;
+	public void setWindowNoBean(WindowNoDTO windowNoBean) {
+		this.windowNoBean = windowNoBean;
 	}
 
-	@Override
-	public String toString() {
-		return "PageInfoDTO [id=" + id + ", nameREF=" + nameREF + ", dept=" + dept + ", station=" + station
-				+ ", windowNo=" + windowNo + ", carType=" + carType + ", energyType=" + energyType + ", plateType="
-				+ plateType + "]";
-	}
+    @Override
+    public String toString() {
+        return "PageInfoDTO [id=" + id + ", carTypeBean=" + carTypeBean + ", deptBean=" + deptBean + ", energyTypeBean="
+                + energyTypeBean + ", nameRef=" + nameRef + ", plateTypeBean=" + plateTypeBean + ", stationBean="
+                + stationBean + ", windowNoBean=" + windowNoBean + "]";
+    }
 
 }

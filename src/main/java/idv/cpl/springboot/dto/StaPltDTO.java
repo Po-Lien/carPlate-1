@@ -1,58 +1,68 @@
 package idv.cpl.springboot.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
 
+
+/**
+ * The persistent class for the sta_plt database table.
+ * 
+ */
 @Entity
-@Table(name = "sta_plt")
-public class StaPltDTO {
+@Table(name="sta_plt")
+@NamedQuery(name="StaPltDTO.findAll", query="SELECT s FROM StaPltDTO s")
+public class StaPltDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
 
-	public StaPltDTO(String sta_value, String plt_value) {
-		this.sta_value = sta_value;
-		this.plt_value = plt_value;
+	//bi-directional many-to-one association to PlateTypeDTO
+	@ManyToOne
+	@JoinColumn(name="plt_value")
+	private PlateTypeDTO plateType;
+
+	//bi-directional many-to-one association to StationDTO
+	@ManyToOne
+	@JoinColumn(name="sta_value")
+	private StationDTO station;
+
+	public StaPltDTO() {
 	}
 
-	@Column(name = "sta_value")
-	private String sta_value;
+	public StaPltDTO(PlateTypeDTO plateType, StationDTO station) {
+        this.plateType = plateType;
+        this.station = station;
+    }
 
-	@Column(name = "plt_value")
-	private String plt_value;
-
-	public Long getId() {
-		return id;
+    public long getId() {
+		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getSta_value() {
-		return sta_value;
+	public PlateTypeDTO getPlateType() {
+		return this.plateType;
 	}
 
-	public void setSta_value(String sta_value) {
-		this.sta_value = sta_value;
+	public void setPlateType(PlateTypeDTO plateType) {
+		this.plateType = plateType;
 	}
 
-	public String getPlt_value() {
-		return plt_value;
+	public StationDTO getStation() {
+		return this.station;
 	}
 
-	public void setPlt_value(String plt_value) {
-		this.plt_value = plt_value;
+	public void setStation(StationDTO station) {
+		this.station = station;
 	}
 
-	@Override
-	public String toString() {
-		return "StaPltDTO [id=" + id + ", sta_value=" + sta_value + ", plt_value=" + plt_value + "]";
-	}
+    @Override
+    public String toString() {
+        return "StaPltDTO [id=" + id + ", plateType=" + plateType + ", station=" + station + "]";
+    }
 
 }

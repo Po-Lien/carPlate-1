@@ -6,7 +6,7 @@
    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
    http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
   <!-- 規則：{yyyyMMddXXX}_{type}_{entityName}.xml -->
-   <include file="liquibase/changelog/20220915006_addEntity_delete.xml" relativeToChangelogFile="false" />
+   <!-- <include file="liquibase/changelog/20220915006_addEntity_delete.xml" relativeToChangelogFile="false" /> -->
    <include file="liquibase/changelog/20220905002_addEntity_dept.xml" relativeToChangelogFile="false" />
    <include file="liquibase/changelog/20220905003_addEntity_station.xml" relativeToChangelogFile="false" />
    <include file="liquibase/changelog/20220905004_addEntity_window_no.xml" relativeToChangelogFile="false" />

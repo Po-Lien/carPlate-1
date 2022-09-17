@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: @activatedProperties@
   liquibase:
     change-log: classpath:liquibase/master.xml
   jpa:
@@ -17,3 +15,5 @@ spring:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  profiles:
+    active: @activatedProperties@

@@ -1,58 +1,69 @@
 package idv.cpl.springboot.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
 
+
+/**
+ * The persistent class for the sta_car database table.
+ * 
+ */
 @Entity
-@Table(name = "sta_car")
-public class StaCarDTO {
+@Table(name="sta_car")
+@NamedQuery(name="StaCarDTO.findAll", query="SELECT s FROM StaCarDTO s")
+public class StaCarDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
 
-	@Column(name = "sta_value")
-	private String sta_value;
+	//bi-directional many-to-one association to CarTypeDTO
+	@ManyToOne
+	@JoinColumn(name="car_value")
+	private CarTypeDTO carType;
 
-	@Column(name = "car_value")
-	private String car_value;
-	
-	public StaCarDTO(String sta_value, String car_value) {
-		this.sta_value = sta_value;
-		this.car_value = car_value;
+	//bi-directional many-to-one association to StationDTO
+	@ManyToOne
+	@JoinColumn(name="sta_value")
+	private StationDTO station;
+
+	public StaCarDTO() {
 	}
 
-	public Long getId() {
-		return id;
+	public StaCarDTO(CarTypeDTO carType, StationDTO station) {
+        super();
+        this.carType = carType;
+        this.station = station;
+    }
+
+    public long getId() {
+		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getSta_value() {
-		return sta_value;
+	public CarTypeDTO getCarType() {
+		return this.carType;
 	}
 
-	public void setSta_value(String sta_value) {
-		this.sta_value = sta_value;
+	public void setCarType(CarTypeDTO carType) {
+		this.carType = carType;
 	}
 
-	public String getCar_value() {
-		return car_value;
+	public StationDTO getStation() {
+		return this.station;
 	}
 
-	public void setCar_value(String car_value) {
-		this.car_value = car_value;
+	public void setStation(StationDTO station) {
+		this.station = station;
 	}
 
-	@Override
-	public String toString() {
-		return "StaCarDTO [id=" + id + ", sta_value=" + sta_value + ", car_value=" + car_value + "]";
-	}
+    @Override
+    public String toString() {
+        return "StaCarDTO [id=" + id + ", carType=" + carType + ", station=" + station + "]";
+    }
 
 }
