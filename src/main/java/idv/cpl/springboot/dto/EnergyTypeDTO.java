@@ -1,43 +1,37 @@
 package idv.cpl.springboot.dto;
 
-import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the energy_type database table.
  * 
  */
 @Entity
-@Table(name="energy_type")
-@NamedQuery(name="EnergyTypeDTO.findAll", query="SELECT e FROM EnergyTypeDTO e")
-public class EnergyTypeDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Table(name = "energy_type")
+@NamedQuery(name = "EnergyTypeDTO.findAll", query = "SELECT e FROM EnergyTypeDTO e")
+public class EnergyTypeDTO {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String htmlValue;
 
 	private String htmlNM;
-
-	//bi-directional many-to-one association to EngCarDTO
-	@OneToMany(mappedBy="energyType")
-	private List<EngCarDTO> engCars;
-
-	//bi-directional many-to-one association to PageInfoDTO
-	@OneToMany(mappedBy="energyTypeBean")
-	private List<PageInfoDTO> pageInfos;
 
 	public EnergyTypeDTO() {
 	}
 
 	public EnergyTypeDTO(String htmlValue, String htmlNM) {
-        this.htmlValue = htmlValue;
-        this.htmlNM = htmlNM;
-    }
+		super();
+		this.htmlValue = htmlValue;
+		this.htmlNM = htmlNM;
+	}
 
-    public String getHtmlValue() {
+	public String getHtmlValue() {
 		return this.htmlValue;
 	}
 
@@ -53,54 +47,9 @@ public class EnergyTypeDTO implements Serializable {
 		this.htmlNM = htmlNM;
 	}
 
-	public List<EngCarDTO> getEngCars() {
-		return this.engCars;
+	@Override
+	public String toString() {
+		return "EnergyTypeDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + "]";
 	}
-
-	public void setEngCars(List<EngCarDTO> engCars) {
-		this.engCars = engCars;
-	}
-
-	public EngCarDTO addEngCar(EngCarDTO engCar) {
-		getEngCars().add(engCar);
-		engCar.setEnergyType(this);
-
-		return engCar;
-	}
-
-	public EngCarDTO removeEngCar(EngCarDTO engCar) {
-		getEngCars().remove(engCar);
-		engCar.setEnergyType(null);
-
-		return engCar;
-	}
-
-	public List<PageInfoDTO> getPageInfos() {
-		return this.pageInfos;
-	}
-
-	public void setPageInfos(List<PageInfoDTO> pageInfos) {
-		this.pageInfos = pageInfos;
-	}
-
-	public PageInfoDTO addPageInfo(PageInfoDTO pageInfo) {
-		getPageInfos().add(pageInfo);
-		pageInfo.setEnergyTypeBean(this);
-
-		return pageInfo;
-	}
-
-	public PageInfoDTO removePageInfo(PageInfoDTO pageInfo) {
-		getPageInfos().remove(pageInfo);
-		pageInfo.setEnergyTypeBean(null);
-
-		return pageInfo;
-	}
-
-    @Override
-    public String toString() {
-        return "EnergyTypeDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + ", engCars=" + engCars + ", pageInfos="
-                + pageInfos + "]";
-    }
 
 }

@@ -1,8 +1,11 @@
 package idv.cpl.springboot.dto;
 
-import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -12,8 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="name_ref")
 @NamedQuery(name="NameRefDTO.findAll", query="SELECT n FROM NameRefDTO n")
-public class NameRefDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class NameRefDTO  {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,19 +25,19 @@ public class NameRefDTO implements Serializable {
 
 	private String htmlValue;
 
-	//bi-directional many-to-one association to PageInfoDTO
-	@OneToMany(mappedBy="nameRef")
-	private List<PageInfoDTO> pageInfos;
+	private String tableNM;
 
 	public NameRefDTO() {
 	}
 
-	public NameRefDTO(String htmlNM, String htmlValue) {
-        this.htmlNM = htmlNM;
-        this.htmlValue = htmlValue;
-    }
+	public NameRefDTO(String htmlNM, String htmlValue, String tableNM) {
+		super();
+		this.htmlNM = htmlNM;
+		this.htmlValue = htmlValue;
+		this.tableNM = tableNM;
+	}
 
-    public long getId() {
+	public long getId() {
 		return this.id;
 	}
 
@@ -59,32 +61,18 @@ public class NameRefDTO implements Serializable {
 		this.htmlValue = htmlValue;
 	}
 
-	public List<PageInfoDTO> getPageInfos() {
-		return this.pageInfos;
+	public String getTableNM() {
+		return this.tableNM;
 	}
 
-	public void setPageInfos(List<PageInfoDTO> pageInfos) {
-		this.pageInfos = pageInfos;
+	public void setTableNM(String tableNM) {
+		this.tableNM = tableNM;
 	}
 
-	public PageInfoDTO addPageInfo(PageInfoDTO pageInfo) {
-		getPageInfos().add(pageInfo);
-		pageInfo.setNameRef(this);
-
-		return pageInfo;
+	@Override
+	public String toString() {
+		return "NameRefDTO [id=" + id + ", htmlNM=" + htmlNM + ", htmlValue=" + htmlValue + ", tableNM=" + tableNM
+				+ "]";
 	}
-
-	public PageInfoDTO removePageInfo(PageInfoDTO pageInfo) {
-		getPageInfos().remove(pageInfo);
-		pageInfo.setNameRef(null);
-
-		return pageInfo;
-	}
-
-    @Override
-    public String toString() {
-        return "NameRefDTO [id=" + id + ", htmlNM=" + htmlNM + ", htmlValue=" + htmlValue + ", pageInfos=" + pageInfos
-                + "]";
-    }
 
 }

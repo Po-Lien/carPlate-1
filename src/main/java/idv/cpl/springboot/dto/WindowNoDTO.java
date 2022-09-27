@@ -1,44 +1,40 @@
 package idv.cpl.springboot.dto;
 
-import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the window_no database table.
  * 
  */
 @Entity
-@Table(name="window_no")
-@NamedQuery(name="WindowNoDTO.findAll", query="SELECT w FROM WindowNoDTO w")
-public class WindowNoDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Table(name = "window_no")
+@NamedQuery(name = "WindowNoDTO.findAll", query = "SELECT w FROM WindowNoDTO w")
+public class WindowNoDTO {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String htmlValue;
 
 	private String htmlNM;
 
-	//bi-directional many-to-one association to PageInfoDTO
-	@OneToMany(mappedBy="windowNoBean")
-	private List<PageInfoDTO> pageInfos;
-
-	//bi-directional many-to-one association to StationDTO
-	@ManyToOne
-	@JoinColumn(name="stationValue")
-	private StationDTO station;
+	private String stationValue;
 
 	public WindowNoDTO() {
 	}
 
-	public WindowNoDTO(String htmlValue, String htmlNM) {
-        this.htmlValue = htmlValue;
-        this.htmlNM = htmlNM;
-    }
+	public WindowNoDTO(String htmlValue, String htmlNM, String stationValue) {
+		super();
+		this.htmlValue = htmlValue;
+		this.htmlNM = htmlNM;
+		this.stationValue = stationValue;
+	}
 
-    public String getHtmlValue() {
+	public String getHtmlValue() {
 		return this.htmlValue;
 	}
 
@@ -54,40 +50,17 @@ public class WindowNoDTO implements Serializable {
 		this.htmlNM = htmlNM;
 	}
 
-	public List<PageInfoDTO> getPageInfos() {
-		return this.pageInfos;
+	public String getStationValue() {
+		return this.stationValue;
 	}
 
-	public void setPageInfos(List<PageInfoDTO> pageInfos) {
-		this.pageInfos = pageInfos;
+	public void setStationValue(String stationValue) {
+		this.stationValue = stationValue;
 	}
 
-	public PageInfoDTO addPageInfo(PageInfoDTO pageInfo) {
-		getPageInfos().add(pageInfo);
-		pageInfo.setWindowNoBean(this);
-
-		return pageInfo;
+	@Override
+	public String toString() {
+		return "WindowNoDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + ", stationValue=" + stationValue + "]";
 	}
-
-	public PageInfoDTO removePageInfo(PageInfoDTO pageInfo) {
-		getPageInfos().remove(pageInfo);
-		pageInfo.setWindowNoBean(null);
-
-		return pageInfo;
-	}
-
-	public StationDTO getStation() {
-		return this.station;
-	}
-
-	public void setStation(StationDTO station) {
-		this.station = station;
-	}
-
-    @Override
-    public String toString() {
-        return "WindowNoDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + ", pageInfos=" + pageInfos + ", station="
-                + station + "]";
-    }
 
 }
