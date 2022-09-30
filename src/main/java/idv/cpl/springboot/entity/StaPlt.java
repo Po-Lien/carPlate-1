@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,30 +9,30 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the sta_car database table.
+ * The persistent class for the sta_plt database table.
  * 
  */
 @Entity
-@Table(name = "sta_car")
-@NamedQuery(name = "StaCarDTO.findAll", query = "SELECT s FROM StaCarDTO s")
-public class StaCarDTO {
+@Table(name = "sta_plt")
+@NamedQuery(name = "StaPltDTO.findAll", query = "SELECT s FROM StaPlt s")
+public class StaPlt {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "car_value")
-	private String carValue;
+	@Column(name = "plt_value")
+	private String pltValue;
 
 	@Column(name = "sta_value")
 	private String staValue;
 
-	public StaCarDTO() {
+	public StaPlt() {
 	}
 
-	public StaCarDTO(String carValue, String staValue) {
+	public StaPlt(String pltValue, String staValue) {
 		super();
-		this.carValue = carValue;
+		this.pltValue = pltValue;
 		this.staValue = staValue;
 	}
 
@@ -44,12 +44,12 @@ public class StaCarDTO {
 		this.id = id;
 	}
 
-	public String getCarValue() {
-		return this.carValue;
+	public String getPltValue() {
+		return this.pltValue;
 	}
 
-	public void setCarValue(String carValue) {
-		this.carValue = carValue;
+	public void setPltValue(String pltValue) {
+		this.pltValue = pltValue;
 	}
 
 	public String getStaValue() {
@@ -62,7 +62,7 @@ public class StaCarDTO {
 
 	@Override
 	public String toString() {
-		return "StaCarDTO [id=" + id + ", carValue=" + carValue + ", staValue=" + staValue + "]";
+		return "StaPltDTO [id=" + id + ", pltValue=" + pltValue + ", staValue=" + staValue + "]";
 	}
 
 }

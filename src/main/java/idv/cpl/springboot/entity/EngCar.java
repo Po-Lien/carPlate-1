@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +14,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "eng_car")
-@NamedQuery(name = "EngCarDTO.findAll", query = "SELECT e FROM EngCarDTO e")
-public class EngCarDTO {
+@NamedQuery(name = "EngCarDTO.findAll", query = "SELECT e FROM EngCar e")
+public class EngCar {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,10 @@ public class EngCarDTO {
 	@Column(name = "eng_value")
 	private String engValue;
 
-	public EngCarDTO() {
+	public EngCar() {
 	}
 
-	public EngCarDTO(String carValue, String engValue) {
+	public EngCar(String carValue, String engValue) {
 		super();
 		this.carValue = carValue;
 		this.engValue = engValue;

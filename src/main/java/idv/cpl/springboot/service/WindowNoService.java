@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import idv.cpl.springboot.dto.WindowNoDTO;
+import idv.cpl.springboot.entity.WindowNo;
 import idv.cpl.springboot.repository.WindowNoRepository;
 
 @Service
@@ -18,19 +18,19 @@ public class WindowNoService {
         this.WindowNoRepository = WindowNoRepository;
     }
 
-    public WindowNoDTO save(WindowNoDTO WindowNo) {
+    public WindowNo save(WindowNo WindowNo) {
         return WindowNoRepository.save(WindowNo);
     }
 
-    public void delete(WindowNoDTO WindowNo) {
+    public void delete(WindowNo WindowNo) {
         WindowNoRepository.delete(WindowNo);
     }
 
-    public Optional<WindowNoDTO> findById(Long id) {
+    public Optional<WindowNo> findById(Long id) {
         return WindowNoRepository.findById(id);
     }
 
-    public Page<WindowNoDTO> findAllByPageable(Pageable pageable) {
+    public Page<WindowNo> findAllByPageable(Pageable pageable) {
         return WindowNoRepository.findAll(pageable);
     }
 }

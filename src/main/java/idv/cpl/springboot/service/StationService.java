@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import idv.cpl.springboot.dto.StationDTO;
+import idv.cpl.springboot.entity.Station;
 import idv.cpl.springboot.repository.StationRepository;
 
 @Service
@@ -18,19 +18,19 @@ public class StationService {
         this.StationRepository = StationRepository;
     }
 
-    public StationDTO save(StationDTO Station) {
+    public Station save(Station Station) {
         return StationRepository.save(Station);
     }
 
-    public void delete(StationDTO Station) {
+    public void delete(Station Station) {
         StationRepository.delete(Station);
     }
 
-    public Optional<StationDTO> findById(Long id) {
+    public Optional<Station> findById(Long id) {
         return StationRepository.findById(id);
     }
 
-    public Page<StationDTO> findAllByPageable(Pageable pageable) {
+    public Page<Station> findAllByPageable(Pageable pageable) {
         return StationRepository.findAll(pageable);
     }
 }

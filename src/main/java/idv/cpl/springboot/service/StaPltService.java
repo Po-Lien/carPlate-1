@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import idv.cpl.springboot.dto.StaPltDTO;
+import idv.cpl.springboot.entity.StaPlt;
 import idv.cpl.springboot.repository.StaPltRepository;
 
 @Service
@@ -18,19 +18,19 @@ public class StaPltService {
         this.StaPltRepository = StaPltRepository;
     }
 
-    public StaPltDTO save(StaPltDTO StaPlt) {
+    public StaPlt save(StaPlt StaPlt) {
         return StaPltRepository.save(StaPlt);
     }
 
-    public void delete(StaPltDTO StaPlt) {
+    public void delete(StaPlt StaPlt) {
         StaPltRepository.delete(StaPlt);
     }
 
-    public Optional<StaPltDTO> findById(Long id) {
+    public Optional<StaPlt> findById(Long id) {
         return StaPltRepository.findById(id);
     }
 
-    public Page<StaPltDTO> findAllByPageable(Pageable pageable) {
+    public Page<StaPlt> findAllByPageable(Pageable pageable) {
         return StaPltRepository.findAll(pageable);
     }
 }

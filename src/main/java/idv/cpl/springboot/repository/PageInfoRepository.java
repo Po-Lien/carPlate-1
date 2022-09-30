@@ -1,11 +1,12 @@
 package idv.cpl.springboot.repository;
 
 import org.springframework.stereotype.Repository;
+
+import idv.cpl.springboot.entity.PageInfo;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import idv.cpl.springboot.dto.PageInfoDTO;
-
 @Repository
-public interface PageInfoRepository extends JpaRepository<PageInfoDTO, Long> {
+public interface PageInfoRepository extends JpaRepository<PageInfo, Long> {
 
 }

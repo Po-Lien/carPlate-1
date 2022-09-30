@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,13 +8,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the energy_type database table.
+ * The persistent class for the plate_type database table.
  * 
  */
 @Entity
-@Table(name = "energy_type")
-@NamedQuery(name = "EnergyTypeDTO.findAll", query = "SELECT e FROM EnergyTypeDTO e")
-public class EnergyTypeDTO {
+@Table(name = "plate_type")
+@NamedQuery(name = "PlateTypeDTO.findAll", query = "SELECT p FROM PlateType p")
+public class PlateType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class EnergyTypeDTO {
 
 	private String htmlNM;
 
-	public EnergyTypeDTO() {
+	public PlateType() {
 	}
 
-	public EnergyTypeDTO(String htmlValue, String htmlNM) {
+	public PlateType(String htmlValue, String htmlNM) {
 		super();
 		this.htmlValue = htmlValue;
 		this.htmlNM = htmlNM;
@@ -49,7 +49,7 @@ public class EnergyTypeDTO {
 
 	@Override
 	public String toString() {
-		return "EnergyTypeDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + "]";
+		return "PlateTypeDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + "]";
 	}
 
 }

@@ -7,24 +7,24 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import idv.cpl.springboot.dto.PageInfoDTO;
+import idv.cpl.springboot.entity.PageInfo;
 
 public interface IPageInfoService {
-	public PageInfoDTO save(PageInfoDTO PageInfo);
+	public PageInfo save(PageInfo PageInfo);
 
-	public void delete(PageInfoDTO PageInfo);
+	public void delete(PageInfo PageInfo);
 
 	public void deleteAll();
 
-	public Optional<PageInfoDTO> findById(Long id);
+	public Optional<PageInfo> findById(Long id);
 
-	public List<PageInfoDTO> findAll();
+	public List<PageInfo> findAll();
 	
-	public List<PageInfoDTO> findAll(Example arg0);
+	public List<PageInfo> findAll(Example arg0);
 
-	public Page<PageInfoDTO> findAllByPageable(Pageable pageable);
+	public Page<PageInfo> findAllByPageable(Pageable pageable);
 
 	public void saveAuto() throws Exception;
 
-	public List<PageInfoDTO> autoFind(String[] deptValues, String plateNo) throws Exception;
+	public List<PageInfo> autoFind(String[] deptValues, String plateNo) throws Exception;
 }

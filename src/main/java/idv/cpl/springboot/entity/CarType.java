@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,13 +8,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the dept database table.
+ * The persistent class for the car_type database table.
  * 
  */
 @Entity
-@Table(name = "dept")
-@NamedQuery(name = "DeptDTO.findAll", query = "SELECT d FROM DeptDTO d")
-public class DeptDTO {
+@Table(name = "car_type")
+@NamedQuery(name = "CarTypeDTO.findAll", query = "SELECT c FROM CarType c")
+public class CarType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class DeptDTO {
 
 	private String htmlNM;
 
-	public DeptDTO() {
+	public CarType() {
 	}
 
-	public DeptDTO(String htmlValue, String htmlNM) {
+	public CarType(String htmlValue, String htmlNM) {
 		super();
 		this.htmlValue = htmlValue;
 		this.htmlNM = htmlNM;
@@ -49,7 +49,7 @@ public class DeptDTO {
 
 	@Override
 	public String toString() {
-		return "DeptDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + "]";
+		return "CarTypeDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + "]";
 	}
 
 }

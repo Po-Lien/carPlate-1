@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,26 +8,29 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the car_type database table.
+ * The persistent class for the station database table.
  * 
  */
 @Entity
-@Table(name = "car_type")
-@NamedQuery(name = "CarTypeDTO.findAll", query = "SELECT c FROM CarTypeDTO c")
-public class CarTypeDTO {
+@Table(name = "station")
+@NamedQuery(name = "StationDTO.findAll", query = "SELECT s FROM Station s")
+public class Station {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String htmlValue;
 
+	private String deptValue;
+
 	private String htmlNM;
 
-	public CarTypeDTO() {
+	public Station() {
 	}
 
-	public CarTypeDTO(String htmlValue, String htmlNM) {
+	public Station(String htmlValue, String htmlNM, String deptValue) {
 		super();
 		this.htmlValue = htmlValue;
+		this.deptValue = deptValue;
 		this.htmlNM = htmlNM;
 	}
 
@@ -37,6 +40,14 @@ public class CarTypeDTO {
 
 	public void setHtmlValue(String htmlValue) {
 		this.htmlValue = htmlValue;
+	}
+
+	public String getDeptValue() {
+		return this.deptValue;
+	}
+
+	public void setDeptValue(String deptValue) {
+		this.deptValue = deptValue;
 	}
 
 	public String getHtmlNM() {
@@ -49,7 +60,7 @@ public class CarTypeDTO {
 
 	@Override
 	public String toString() {
-		return "CarTypeDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + "]";
+		return "StationDTO [htmlValue=" + htmlValue + ", deptValue=" + deptValue + ", htmlNM=" + htmlNM + "]";
 	}
 
 }

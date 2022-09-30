@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +14,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="name_ref")
-@NamedQuery(name="NameRefDTO.findAll", query="SELECT n FROM NameRefDTO n")
-public class NameRefDTO  {
+@NamedQuery(name="NameRefDTO.findAll", query="SELECT n FROM NameRef n")
+public class NameRef  {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,10 +27,10 @@ public class NameRefDTO  {
 
 	private String tableNM;
 
-	public NameRefDTO() {
+	public NameRef() {
 	}
 
-	public NameRefDTO(String htmlNM, String htmlValue, String tableNM) {
+	public NameRef(String htmlNM, String htmlValue, String tableNM) {
 		super();
 		this.htmlNM = htmlNM;
 		this.htmlValue = htmlValue;

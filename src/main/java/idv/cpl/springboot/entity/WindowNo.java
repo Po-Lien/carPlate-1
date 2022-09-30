@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,30 +8,30 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the station database table.
+ * The persistent class for the window_no database table.
  * 
  */
 @Entity
-@Table(name = "station")
-@NamedQuery(name = "StationDTO.findAll", query = "SELECT s FROM StationDTO s")
-public class StationDTO {
+@Table(name = "window_no")
+@NamedQuery(name = "WindowNoDTO.findAll", query = "SELECT w FROM WindowNo w")
+public class WindowNo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String htmlValue;
 
-	private String deptValue;
-
 	private String htmlNM;
 
-	public StationDTO() {
+	private String stationValue;
+
+	public WindowNo() {
 	}
 
-	public StationDTO(String htmlValue, String htmlNM, String deptValue) {
+	public WindowNo(String htmlValue, String htmlNM, String stationValue) {
 		super();
 		this.htmlValue = htmlValue;
-		this.deptValue = deptValue;
 		this.htmlNM = htmlNM;
+		this.stationValue = stationValue;
 	}
 
 	public String getHtmlValue() {
@@ -42,14 +42,6 @@ public class StationDTO {
 		this.htmlValue = htmlValue;
 	}
 
-	public String getDeptValue() {
-		return this.deptValue;
-	}
-
-	public void setDeptValue(String deptValue) {
-		this.deptValue = deptValue;
-	}
-
 	public String getHtmlNM() {
 		return this.htmlNM;
 	}
@@ -58,9 +50,17 @@ public class StationDTO {
 		this.htmlNM = htmlNM;
 	}
 
+	public String getStationValue() {
+		return this.stationValue;
+	}
+
+	public void setStationValue(String stationValue) {
+		this.stationValue = stationValue;
+	}
+
 	@Override
 	public String toString() {
-		return "StationDTO [htmlValue=" + htmlValue + ", deptValue=" + deptValue + ", htmlNM=" + htmlNM + "]";
+		return "WindowNoDTO [htmlValue=" + htmlValue + ", htmlNM=" + htmlNM + ", stationValue=" + stationValue + "]";
 	}
 
 }

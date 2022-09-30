@@ -1,4 +1,4 @@
-package idv.cpl.springboot.dto;
+package idv.cpl.springboot.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,59 +8,73 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * The persistent class for the page_info database table.
  * 
  */
 @Entity
 @Table(name = "page_info")
-@NamedQuery(name = "PageInfoDTO.findAll", query = "SELECT p FROM PageInfoDTO p")
-public class PageInfoDTO {
+@NamedQuery(name = "PageInfoDTO.findAll", query = "SELECT p FROM PageInfo p")
+public class PageInfo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@ApiModelProperty(value = "車種中文", example = "1001")
 	@Column(name = "cartypenm")
 	private String carTypeNM;
 
+	@ApiModelProperty(value = "車種代號", example = "1001")
 	@Column(name = "cartypevalue")
 	private String carTypeValue;
 
+	@ApiModelProperty(value = "地區中文", example = "1001")
 	@Column(name = "deptnm")
 	private String deptNM;
 
+	@ApiModelProperty(value = "地區代號", example = "1001")
 	@Column(name = "deptvalue")
 	private String deptValue;
 
+	@ApiModelProperty(value = "監理站中文", example = "1001")
 	@Column(name = "energytypenm")
 	private String energyTypeNM;
 
+	@ApiModelProperty(value = "監理站代號", example = "1001")
 	@Column(name = "energytypevalue")
 	private String energyTypeValue;
 
+	@ApiModelProperty(value = "車牌別中文", example = "1001")
 	@Column(name = "platetypenm")
 	private String plateTypeNM;
 
+	@ApiModelProperty(value = "車牌別代號", example = "1001")
 	@Column(name = "platetypevalue")
 	private String plateTypeValue;
 
+	@ApiModelProperty(value = "監理站中文", example = "1001")
 	@Column(name = "stationnm")
 	private String stationNM;
 
+	@ApiModelProperty(value = "監理站代號", example = "1001")
 	@Column(name = "stationvalue")
 	private String stationValue;
 
+	@ApiModelProperty(value = "領牌地址中文", example = "1001")
 	@Column(name = "windownonm")
 	private String windowNoNM;
 
+	@ApiModelProperty(value = "領牌地址代號", example = "1001")
 	@Column(name = "windownovalue")
 	private String windowNoValue;
 
-	public PageInfoDTO() {
+	public PageInfo() {
 	}
 
-	public PageInfoDTO(String carTypeNM, String carTypeValue, String deptNM, String deptValue, String energyTypeNM,
+	public PageInfo(String carTypeNM, String carTypeValue, String deptNM, String deptValue, String energyTypeNM,
 			String energyTypeValue, String plateTypeNM, String plateTypeValue, String stationNM, String stationValue,
 			String windowNoNM, String windowNoValue) {
 		super();

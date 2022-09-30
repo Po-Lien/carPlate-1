@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 import com.twocaptcha.TwoCaptcha;
 import com.twocaptcha.captcha.Normal;
 
-import idv.cpl.springboot.dto.PageInfoDTO;
+import idv.cpl.springboot.entity.PageInfo;
 import idv.cpl.springboot.repository.PageInfoRepository;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -68,19 +68,19 @@ public class PageInfoService implements IPageInfoService {
 
 	private StringBuilder sb;
 
-	private List<PageInfoDTO> pageInfoList;
+	private List<PageInfo> pageInfoList;
 
 	public PageInfoService(PageInfoRepository PageInfoRepository) {
 		this.pageInfoRepository = PageInfoRepository;
 	}
 
 	@Override
-	public PageInfoDTO save(PageInfoDTO PageInfo) {
+	public PageInfo save(PageInfo PageInfo) {
 		return pageInfoRepository.save(PageInfo);
 	}
 
 	@Override
-	public void delete(PageInfoDTO PageInfo) {
+	public void delete(PageInfo PageInfo) {
 		pageInfoRepository.delete(PageInfo);
 	}
 
@@ -90,22 +90,22 @@ public class PageInfoService implements IPageInfoService {
 	}
 
 	@Override
-	public Optional<PageInfoDTO> findById(Long id) {
+	public Optional<PageInfo> findById(Long id) {
 		return pageInfoRepository.findById(id);
 	}
 
 	@Override
-	public List<PageInfoDTO> findAll(Example arg0) {
+	public List<PageInfo> findAll(Example arg0) {
 		return pageInfoRepository.findAll(arg0);
 	}
 
 	@Override
-	public List<PageInfoDTO> findAll() {
+	public List<PageInfo> findAll() {
 		return pageInfoRepository.findAll();
 	}
 
 	@Override
-	public Page<PageInfoDTO> findAllByPageable(Pageable pageable) {
+	public Page<PageInfo> findAllByPageable(Pageable pageable) {
 		return pageInfoRepository.findAll(pageable);
 	}
 
@@ -121,16 +121,16 @@ public class PageInfoService implements IPageInfoService {
 	}
 
 	@Override
-	public List<PageInfoDTO> autoFind(String[] deptValues, String plateNo) throws Exception {
-		List<PageInfoDTO> pageInfoList = null;
+	public List<PageInfo> autoFind(String[] deptValues, String plateNo) throws Exception {
+		List<PageInfo> pageInfoList = null;
 
 		if (deptValues.length == 0) {
 			pageInfoList = pageInfoRepository.findAll();
 		} else {
 			for (String value : deptValues) {
-				PageInfoDTO pageInfoDTO = new PageInfoDTO();
+				PageInfo pageInfoDTO = new PageInfo();
 				pageInfoDTO.setDeptValue(value);
-				Example<PageInfoDTO> example = Example.of(pageInfoDTO);
+				Example<PageInfo> example = Example.of(pageInfoDTO);
 				List resultList = pageInfoRepository.findAll(example);
 				if (pageInfoList == null) {
 					pageInfoList = resultList;
@@ -148,8 +148,8 @@ public class PageInfoService implements IPageInfoService {
 			sbCookie.append(ck.getName()).append('=').append(ck.getValue()).append(';');
 		}
 
-		List<PageInfoDTO> rtnList = new ArrayList();
-		for (PageInfoDTO dto : pageInfoList) {
+		List<PageInfo> rtnList = new ArrayList();
+		for (PageInfo dto : pageInfoList) {
 			for (int i = 0; i < webSelects.length; i++) {
 				Select selWeb = new Select(browser.findElement(By.cssSelector("#" + webSelects[i])));
 				switch (i) {
@@ -399,7 +399,7 @@ public class PageInfoService implements IPageInfoService {
 
 						// drop table & save
 						if (pageInfoList != null && pageInfoList.isEmpty()) {
-							PageInfoDTO dto = new PageInfoDTO();
+							PageInfo dto = new PageInfo();
 							for (int j = 0; j < webList.size(); j++) {
 								for (Entry<String, String> entry : webList.get(j).entrySet()) {
 									String value = entry.getKey();

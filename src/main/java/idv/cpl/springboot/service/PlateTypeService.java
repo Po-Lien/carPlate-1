@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import idv.cpl.springboot.dto.PlateTypeDTO;
+import idv.cpl.springboot.entity.PlateType;
 import idv.cpl.springboot.repository.PlateTypeRepository;
 
 @Service
@@ -18,19 +18,19 @@ public class PlateTypeService {
         this.PlateTypeRepository = PlateTypeRepository;
     }
 
-    public PlateTypeDTO save(PlateTypeDTO PlateType) {
+    public PlateType save(PlateType PlateType) {
         return PlateTypeRepository.save(PlateType);
     }
 
-    public void delete(PlateTypeDTO PlateType) {
+    public void delete(PlateType PlateType) {
         PlateTypeRepository.delete(PlateType);
     }
 
-    public Optional<PlateTypeDTO> findById(Long id) {
+    public Optional<PlateType> findById(Long id) {
         return PlateTypeRepository.findById(id);
     }
 
-    public Page<PlateTypeDTO> findAllByPageable(Pageable pageable) {
+    public Page<PlateType> findAllByPageable(Pageable pageable) {
         return PlateTypeRepository.findAll(pageable);
     }
 }
